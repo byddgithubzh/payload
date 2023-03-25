@@ -64,7 +64,8 @@ jobs:
       run: |
        cd ~
        ls -l
-       7z e system.img
+       7z i system.img
+       7z x system.img
        y
        tree
        
