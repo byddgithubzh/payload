@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  https://bigota.d.miui.com/V13.0.10.0.SKHCNXM/miui_ALIOTH_V13.0.10.0.SKHCNXM_b25015b468_12.0.zip 
+  ROM_URL:  https://bigota.d.miui.com/V13.1.21.0.SLRCNXM/miui_ZIZHAN_V13.1.21.0.SLRCNXM_e65b3d2265_12.0.zip 
 
   TZ: Asia/Shanghai
 
@@ -33,7 +33,7 @@ jobs:
     - name: Download the ROM
       run: |
        cd ~
-       aria2c -o rom.zip -s 8 $ROM_URL
+       aria2c -o rom.zip -s 16 $ROM_URL
        ls -l
        
     - name: unzip the ROM1
