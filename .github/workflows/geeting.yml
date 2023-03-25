@@ -33,7 +33,7 @@ jobs:
     - name: Download the ROM
       run: |
        cd ~
-       aria2c -O rom.zip $ROM_URL
+       aria2c -o rom.zip -s 4 $ROM_URL
        ls -l
        
     - name: unzip the ROM1
