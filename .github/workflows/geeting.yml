@@ -20,9 +20,9 @@ jobs:
        cd ~
        uname -a
        sudo -E apt-get -qq update
-       wget https://github.com/byddgithubzh/payload/raw/main/payload.zip
+       wget https://github.com/ssut/payload-dumper-go/releases/download/1.2.2/payload-dumper-go_1.2.2_linux_amd64.tar.gz
        mkdir ROMFILE
-       unzip payload.zip -d ROMFILE
+       tar -zxvf payload-dumper-go_1.2.2_linux_amd64.tar.gz -C ROMFILE
        wget https://github.com/byddgithubzh/payload/raw/main/aria2c.zip
        unzip aria2c.zip
        wget https://github.com/byddgithubzh/payload/raw/main/7z.zip
@@ -33,7 +33,7 @@ jobs:
     - name: Download the ROM
       run: |
        cd ~
-       aria2c -o rom.zip -s 4 $ROM_URL
+       aria2c -o rom.zip -s 8 $ROM_URL
        ls -l
        
     - name: unzip the ROM1
