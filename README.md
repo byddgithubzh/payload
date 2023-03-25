@@ -7,7 +7,7 @@
 
 # 快速编辑
 
-一步打开[get_images.yml](https://github.com/byddgithubzh/payload/blob/main/.github/workflows/geeting.yml)
+一步打开[get_images.yml](https://github.com/byddgithubzh/payload/edit/main/.github/workflows/geeting.yml)
 
 
 # 打开GitHub Action
