@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  FILE_URL:  https://software.download.prss.microsoft.com/dbazure/Win11_22H2_Chinese_Simplified_x64v1.iso?t=d6afd4f7-cac0-4f74-84e1-5c7707f275c6&e=1679817565&h=c825681aa5deb0e029831c2cb7ac65b2407b67ce26acabcf17089d314e0d3d72
+  FILE_URL:  https://mirrors.lolinet.com/firmware/motorola/oneli_retcn/official/RETCN/XT2251-1_ONELI_RETCN_12_S3SL32.16-16-1_subsidy-DEFAULT_regulatory-DEFAULT_CFC.xml.zip
 
   TZ: Asia/Shanghai
 
