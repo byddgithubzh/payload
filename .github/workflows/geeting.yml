@@ -25,9 +25,9 @@ jobs:
        tar -zxvf payload-dumper-go_1.2.2_linux_amd64.tar.gz -C ROMFILE
        wget https://github.com/byddgithubzh/payload/raw/main/aria2c.zip
        unzip aria2c.zip
-       wget https://github.com/byddgithubzh/payload/raw/main/7z.zip
-       unzip 7z.zip
-       ls ROMFILE
+       wget https://7-zip.org/a/7z2201-linux-x64.tar.xz
+       tar -zxvf 7z2201-linux-x64.tar.xz 
+       ls -l
        
   
     - name: Download the ROM
