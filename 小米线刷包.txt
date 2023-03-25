@@ -1,0 +1,46 @@
+name: get_bootimg_from_payload.bin
+
+on:
+  watch:
+    types: [started]
+    
+env:
+  ROM_URL:  https://bigota.d.miui.com/V13.0.2.0.SLFTRXM/diting_tr_global_images_V13.0.2.0.SLFTRXM_20220929.0000.00_12.0_global_6d75f81401.tgz
+  ROM_NAME: alioth_images_V12.5.3.0.RKHCNXM_20210517.0000.00_11.0_cn
+
+  TZ: Asia/Shanghai
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Download the ROM
+      run: |
+       cd ~
+       wget -O rom.tgz $ROM_URL
+   
+    - name: unzip the ROM
+      run: |
+       cd ~
+       tar -zxvf rom.tgz 
+       dir
+       ls -l
+       tree
+   
+    - name : Upload images1
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_logo_Payload-images
+        path: ~/diting_tr_global_images_V13.0.2.0.SLFTRXM_20220929.0000.00_12.0_global/images/imagefv.*
+        
+    - name : Upload images2
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_splash_Payload-images
+        path: ~/diting_tr_global_images_V13.0.2.0.SLFTRXM_20220929.0000.00_12.0_global/images/splash.*

@@ -1,0 +1,66 @@
+name: get_bootimg_from_payload.bin
+
+on:
+  watch:
+    types: [started]
+    
+env:
+  ROM_URL: https://bigota.d.miui.com/V10.2.8.0.PFGCNXM/miui_LAVENDER_V10.2.8.0.PFGCNXM_b5a787b17c_9.0.zip
+
+  TZ: Asia/Shanghai
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: install Python 3.8
+      uses: actions/setup-python@v1
+      with:
+          python-version: 3.8
+          
+    - name: Initialization environment 
+      run: |
+        cd ~
+        python -m pip install bsdiff4==1.1.5
+        python -m pip install six==1.16.0
+        python -m pip install protobuf==3.19.3
+        
+    - name: Clean Up Disk Space
+      run: |
+        docker rmi `docker images -q`
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo -E apt-get -y autoremove --purge
+        sudo -E apt-get clean 
+          
+  
+    - name: Download the ROM
+      run: |
+       cd ~
+       wget -O rom.zip $ROM_URL
+   
+    - name: unzip the ROM
+      run: |
+       cd ~
+       unzip rom.zip -d payload_dumper
+       dir
+       ls -l
+       tree
+   
+    - name : Upload images1
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: logo_Payload-images
+        path: ~/payload_dumper/firmware-update/logo.*
+        
+    - name : Upload images2
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: R7_splash_Payload-images
+        path: ~/payload_dumper/firmware-update/splash.*

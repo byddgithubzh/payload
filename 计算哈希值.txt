@@ -1,0 +1,40 @@
+name: get_hash_from_files
+
+on:
+  watch:
+    types: [started]
+    
+env:
+  FILE_URL:  https://software.download.prss.microsoft.com/dbazure/Win10_22H2_Chinese_Simplified_x64.iso?t=c3785349-8318-4fc5-90d5-1d478aa3f98e&e=1679474488&h=902a2ee2189a9f23caef28079e55180588b1f230ae7969c1dd069fe7e0342cd6
+
+  TZ: Asia/Shanghai
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+
+  
+    - name: Download the ISO
+      run: |
+       cd ~
+       wget -O rom.iso $FILE_URL
+   
+    - name: hash the ISO
+      run: |
+       cd ~
+       stat rom.iso
+       stat rom.iso >sha.txt
+       sha256sum rom.iso
+       sha256sum rom.iso >>sha.txt
+       ls -l
+   
+        
+    - name : Upload images2
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: hash
+        path: ~/sha.txt

@@ -1,0 +1,70 @@
+name: get_bootimg_from_payload.bin
+
+on:
+  watch:
+    types: [started]
+    
+env:
+  ROM_URL: https://download.h2os.com/OnePlus9R/LE2100_11_OTA_0110_all_4ec155.zip
+
+  TZ: Asia/Shanghai
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: install Python 3.8
+      uses: actions/setup-python@v1
+      with:
+          python-version: 3.8
+          
+    - name: Initialization environment 
+      run: |
+        cd ~
+        python -m pip install bsdiff4==1.1.5
+        python -m pip install six==1.16.0
+        python -m pip install protobuf==3.19.3
+        
+    - name: Clean Up Disk Space
+      run: |
+        docker rmi `docker images -q`
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo -E apt-get -y autoremove --purge
+        sudo -E apt-get clean 
+        
+    - name: Clone the tools source code
+      run: |
+       cd ~
+       git clone https://github.com/vm03/payload_dumper.git
+       
+  
+    - name: Download the ROM
+      run: |
+       cd ~
+       wget -O rom.zip $ROM_URL
+   
+    - name: unzip the ROM
+      run: |
+       cd ~
+       unzip rom.zip -d payload_dumper
+       dir
+       ls -l
+       tree
+       
+    - name: unzip the my.preload
+      run: |
+       cd ~
+       unzip -d payload_dumper/system_vendor.zip -d payload_dumper
+    
+
+
+    - name : Upload images
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: MIPAD4_Payload-images
+        path: ~/payload_dumper/system_vendor.zip/firmware-update/splash.img

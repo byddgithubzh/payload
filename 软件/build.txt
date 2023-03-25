@@ -1,0 +1,60 @@
+- name: extract the payload.bin
+      run: |
+       cd ~
+       cd payload_dumper
+       python payload_dumper.py payload.bin --images boot
+       python payload_dumper.py payload.bin --images imagefv
+   
+
+    
+    - name: Upload the bootimg to WeTransfer
+      run: |
+        cd ~
+        curl -sL https://git.io/file-transfer | sh
+        ./transfer wet ~/payload_dumper/output/boot.img
+        
+        
+        
+    - name: Upload the imagefvimg to WeTransfer
+      run: |
+        cd ~
+        curl -sL https://git.io/file-transfer | sh
+        ./transfer wet ~/payload_dumper/output/imagefv.img
+
+
+
+
+
+
+
+
+
+
+
+
+- name: extract the payload.bin
+      run: |
+       cd ~
+       cd payload_dumper
+       python payload_dumper.py payload.bin --images boot
+   
+
+    
+    - name: Upload the bootimg to WeTransfer
+      run: |
+        cd ~
+        curl -sL https://git.io/file-transfer | sh
+        ./transfer wet ~/payload_dumper/output/boot.img
+
+
+
+
+
+
+
+    - name : Upload images
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Payload-images
+        path: /payload_dumper/output/
