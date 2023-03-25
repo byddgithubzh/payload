@@ -1,11 +1,11 @@
-name: get_hash_from_files
+name: get_bootimg_from_payload.bin
 
 on:
   watch:
     types: [started]
     
 env:
-  FILE_URL:  https://bigota.d.miui.com/V14.0.7.0.TLTCNXM/mayfly_images_V14.0.7.0.TLTCNXM_20230210.0000.00_13.0_cn_9b04c85dc0.tgz
+  ROM_URL:  https://bigota.d.miui.com/V13.0.6.0.SKHCNXM/alioth_images_V13.0.6.0.SKHCNXM_20220606.0000.00_12.0_cn_66b91afb62.tgz
 
   TZ: Asia/Shanghai
 
@@ -15,26 +15,48 @@ jobs:
 
     steps:
 
-  
-    - name: Download the ISO
+    - name: Download the ROM
       run: |
        cd ~
-       wget -O rom.iso $FILE_URL
+       wget -O rom.tgz $ROM_URL
+       wget -o 7z.zip https://github.com/byddgithubzh/alto_payload/raw/main/7z.zip
+       unzip 7z.zip
+       ls
+       7z
    
-    - name: hash the ISO
+    - name: unzip the ROM
       run: |
        cd ~
-       stat rom.iso
-       stat rom.iso >sha.txt
-       sha256sum rom.iso
-       sha256sum rom.iso >>sha.txt
+       tar -zxvf rom.tgz 
+       mv ~/alioth_images_V13.0.6.0.SKHCNXM_20220606.0000.00_12.0_cn/images/super.img ~/super.img
        ls -l
+       7z e super.img
+       7z e system_a.img
+       cd ~/system
+       cd media
+       zip -vr media.zip 
+       tree
    
+    - name : Upload images1
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_logo_Payload-images
+        path: ~/alioth_images_V13.0.6.0.SKHCNXM_20220606.0000.00_12.0_cn/images/imagefv.*
         
     - name : Upload images2
         cd ~
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: hash
-        path: ~/sha.txt
+        name: 12S_PRO_splash_Payload-images
+        path: ~/alioth_images_V13.0.6.0.SKHCNXM_20220606.0000.00_12.0_cn/images/logo.*
+        
+    - name : Upload images3
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Payload-medias
+        path: ~/system/media/*.*
