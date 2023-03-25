@@ -50,13 +50,21 @@ jobs:
        cd ~
        cd ROMFILE
        ./payload-dumper-go -l payload.bin
-       ./payload-dumper-go -p abl,logo,splash,imagefv,system -o img payload.bin 
-       ls -l
-       mv ~/ROMFILE/img/system.img ~/
-       7z e system.img
-       tree
+       ./payload-dumper-go -p abl,logo,splash,imagefv,system -o img payload.bin >log.txt
        cd img
        ls -l
+       cd ~
+       mv /ROMFILE/img/system.img /system.img
+       ls -l
+       
+
+
+    - name: extract the system.img
+      run: |
+       cd ~
+       ls -l
+       7z e system.img
+       tree
        
        
     - name : Upload images logo
