@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  FILE_URL:  https://mirrors.lolinet.com/firmware/motorola/oneli_retcn/official/RETCN/XT2251-1_ONELI_RETCN_12_S3SL32.16-16-1_subsidy-DEFAULT_regulatory-DEFAULT_CFC.xml.zip
+  FILE_URL:  https://bigota.d.miui.com/V14.0.7.0.TLTCNXM/mayfly_images_V14.0.7.0.TLTCNXM_20230210.0000.00_13.0_cn_9b04c85dc0.tgz
 
   TZ: Asia/Shanghai
 
