@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  https://bigota.d.miui.com/V13.0.10.0.SLTCNXM/mayfly_images_V123.1.0.SLTCNXM_20220704.0000.00_12.0_cn_84cc835a28.tgz
+  ROM_URL:  https://kqekllm5ftnb6q9sl2cljlc4b2qc266btmat08rblcp4atg9k0cvu8t3.qc.dolfincdnx.net:10443/xdispatch759f5c113da3ad31/bigota.d.miui.com/V14.0.7.0.TLTCNXM/mayfly_images_V14.0.7.0.TLTCNXM_20230210.0000.00_13.0_cn_9b04c85dc0.tgz?bsreqid=1989e5f6544b66e8f7b1dcdd3f0dfcfb&bsxdisp=se
 
   TZ: Asia/Shanghai
 
