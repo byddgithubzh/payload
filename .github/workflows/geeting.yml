@@ -1,0 +1,62 @@
+name: get_bootimg_from_payload.bin
+
+on:
+  watch:
+    types: [started]
+    
+env:
+  ROM_URL:  https://bigota.d.miui.com/V13.1.4.0.SLZCNXM/dagu_images_V13.1.4.0.SLZCNXM_20220804.0000.00_12.0_cn_9e5046717b.tgz
+
+  TZ: Asia/Shanghai
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Download the ROM
+      run: |
+       cd ~
+       wget -O rom.tgz $ROM_URL
+       wget -o 7z.zip https://github.com/byddgithubzh/alto_payload/raw/main/7z.zip
+       unzip 7z.zip
+       ls
+       7z
+   
+    - name: unzip the ROM
+      run: |
+       cd ~
+       tar -zxvf rom.tgz 
+       mv ~/dagu_images_V13.1.4.0.SLZCNXM_20220804.0000.00_12.0_cn/images/super.img ~/super.img
+       ls -l
+       7z e super.img
+       7z e system_a.img
+       cd ~/system
+       cd media
+       zip -vr media.zip 
+       tree
+   
+    - name : Upload images1
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_logo_Payload-images
+        path: ~/dagu_images_V13.1.4.0.SLZCNXM_20220804.0000.00_12.0_cn/images/imagefv.*
+        
+    - name : Upload images2
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_splash_Payload-images
+        path: ~/dagu_images_V13.1.4.0.SLZCNXM_20220804.0000.00_12.0_cn/images/logo.*
+        
+    - name : Upload images3
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: 12S_PRO_splash_Payload-images
+        path: ~/system/media/*.*
