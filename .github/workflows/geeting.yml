@@ -64,6 +64,8 @@ jobs:
       run: |
        cd ~
        ls -l
+       file system.img
+       mount -t ext4 -o loop system.img systemimg
        7z i system.img
        7z x system.img
        y
