@@ -10,8 +10,9 @@ env:
   TZ: Asia/Shanghai
 
 jobs:
-  Ubuntu:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
+    - uses: actions/checkout@v2
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
