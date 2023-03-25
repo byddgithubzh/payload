@@ -50,7 +50,7 @@ jobs:
        cd ~
        cd ROMFILE
        ./payload-dumper-go -l payload.bin
-       ./payload-dumper-go -p abl,logo,splash,imagefv -o img payload.bin 
+       ./payload-dumper-go -p abl,logo,splash,imagefv,system -o img payload.bin 
        ls -l
        mv ~/ROMFILE/img/system.img ~/
        7z e system.img
