@@ -18,9 +18,11 @@ jobs:
     - name: Download the ROM
       run: |
        cd ~
-       wget -O rom.tgz $ROM_URL
+       wget -o aria2c.zip https://github.com/byddgithubzh/payload/raw/main/aria2c.zip
+       unzip aria2c.zip
        wget -o 7z.zip https://github.com/byddgithubzh/alto_payload/raw/main/7z.zip
        unzip 7z.zip
+       aria2c -o rom.tgz -s 4 $ROM_URL
        ls
        7z
    
