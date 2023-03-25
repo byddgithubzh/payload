@@ -13,6 +13,53 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
+    
+    - name: Download the tools
+      run: |
+       cd ~
+       uname -a
+       sudo -E apt-get -qq update
+       wget https://github.com/ssut/payload-dumper-go/releases/download/1.2.2/payload-dumper-go_1.2.2_linux_amd64.tar.gz
+       mkdir ROMFILE
+       tar -zxvf payload-dumper-go_1.2.2_linux_amd64.tar.gz -C ROMFILE
+       wget https://github.com/byddgithubzh/payload/raw/main/aria2c.zip
+       unzip aria2c.zip
+       wget https://7-zip.org/a/7z2201-linux-x64.tar.xz
+       tar -xf 7z2201-linux-x64.tar.xz 
+       ls -l
+       
+  
+    - name: Download the ROM
+      run: |
+       cd ~
+       aria2c -o rom.zip -s 16 $ROM_URL
+       ls -l
+       
+    - name: unzip the ROM1
+      run: |
+       cd ~
+       unzip rom.zip -d ROMFILE
+       
+       dir
+       ls -l
+       
+              
+    - name: extract the payload.bin
+      run: |
+       cd ~
+       cd ROMFILE
+       ./payload-dumper-go -l payload.bin
+       ./payload-dumper-go -p abl,logo,splash,imagefv,system -o img payload.bin >log.txt
+       cd img
+       ls -l
+       cd ~
+       tree
+       mv ~/ROMFILE/img/system.img ~/system.img
+       ls -l
+    
     - uses: actions/checkout@v3
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
+      with:
+        sudo: false
