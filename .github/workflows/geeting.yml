@@ -53,7 +53,7 @@ jobs:
        ./payload-dumper-go -p abl,logo,splash,imagefv -o img payload.bin 
        ls -l
        mv ~/ROMFILE/img/system_a.img ~/
-       7z e system_a.img
+       7z e system.img
        tree
        cd img
        ls -l
