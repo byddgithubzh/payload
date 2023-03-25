@@ -26,7 +26,7 @@ jobs:
        wget https://github.com/byddgithubzh/payload/raw/main/aria2c.zip
        unzip aria2c.zip
        wget https://7-zip.org/a/7z2201-linux-x64.tar.xz
-       tar -zxvf 7z2201-linux-x64.tar.xz 
+       tar -xf 7z2201-linux-x64.tar.xz 
        ls -l
        
   
