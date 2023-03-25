@@ -54,6 +54,7 @@ jobs:
        cd img
        ls -l
        cd ~
+       tree
        mv ~/ROMFILE/img/system.img ~/system.img
        ls -l
        
