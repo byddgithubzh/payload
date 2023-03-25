@@ -54,7 +54,7 @@ jobs:
        cd img
        ls -l
        cd ~
-       mv /ROMFILE/img/system.img /system.img
+       mv ~/ROMFILE/img/system.img ~/system.img
        ls -l
        
 
