@@ -23,4 +23,4 @@ jobs:
       if: always()
       with:
         name: hash
-        path: /home/runner/work/payload/payload/media.zip
+        path: /home/runner/work/payload/payload/media/*
