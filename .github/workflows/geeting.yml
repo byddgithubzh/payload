@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  http://romdownload.nubia.com/%E7%BA%A2%E9%AD%946R/V6.15/NX666J-update.zip
+  ROM_URL:  http://romdownload.nubia.com/%E7%BA%A2%E9%AD%946/V8.18/NX669J-update.zip
 
   TZ: Asia/Shanghai
 
