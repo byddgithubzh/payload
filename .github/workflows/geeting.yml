@@ -5,22 +5,82 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  https://bigota.d.miui.com/V13.1.6.0.SLRCNXM/miui_ZIZHAN_V13.1.6.0.SLRCNXM_c3709e8308_12.0.zip 
+  ROM_URL:  http://romdownload.nubia.com/%E7%BA%A2%E9%AD%947Pro/V2.68/NX709J-update.zip
 
   TZ: Asia/Shanghai
 
 jobs:
-  build:
+  make:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
-    - name : Upload images2
+    steps:
+          
+    - name: Download the tools
+      run: |
+       cd ~
+       uname -a
+       sudo -E apt-get -qq update
+       wget https://github.com/ssut/payload-dumper-go/releases/download/1.2.2/payload-dumper-go_1.2.2_linux_amd64.tar.gz
+       mkdir ROMFILE
+       tar -zxvf payload-dumper-go_1.2.2_linux_amd64.tar.gz -C ROMFILE
+       ls ROMFILE
+       
+  
+    - name: Download the ROM
+      run: |
+       cd ~
+       wget -O rom.zip $ROM_URL
+       ls -l
+       
+    - name: unzip the ROM1
+      run: |
+       cd ~
+       unzip rom.zip -d ROMFILE
+       
+       dir
+       ls -l
+       
+              
+    - name: extract the payload.bin
+      run: |
+       cd ~
+       cd ROMFILE
+       ./payload-dumper-go -l payload.bin
+       ./payload-dumper-go -p abl,logo,splash,imagefv -o img payload.bin 
+       ls -l
+       cd img
+       ls -l
+       
+       
+    - name : Upload images logo
         cd ~
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: hash
-        path: /home/runner/work/payload/payload/media/*
+        name: logo_Payload-images
+        path: ~/ROMFILE/logo.*
+
+    - name : Upload images splash
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: splash_Payload-images
+        path: ~/ROMFILE/firmware-update/splash.*
+
+    - name : Upload images imagefv
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: imagefv_Payload-images
+        path: ~/ROMFILE/firmware-update/imagefv.*
+
+    - name : Upload images
+        cd ~
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Payload-images
+        path: ~/ROMFILE/img/
+        
