@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  http://romdownload.nubia.com/%E7%BA%A2%E9%AD%947Pro/V2.68/NX709J-update.zip
+  ROM_URL:  http://romdownload.nubia.com/%E7%BA%A2%E9%AD%947/V2.72/NX679J-update.zip
 
   TZ: Asia/Shanghai
 
