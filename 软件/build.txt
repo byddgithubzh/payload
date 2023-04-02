@@ -58,3 +58,69 @@
       with:
         name: Payload-images
         path: /payload_dumper/output/
+
+
+
+
+
+
+
+sudo -E apt-get -qq update
+
+git clone --depth=1 https://github.com/CapShift/D.N.A-2.git -b x86_64 DNA2
+chmod 777 ~/work/payload/payload/ -R
+sudo apt install aria2 simg2img 7zip
+wget https://github.com/ssut/payload-dumper-go/releases/download/1.2.2/payload-dumper-go_1.2.2_linux_amd64.tar.gz
+mkdir ROMFILE
+tar -zxvf payload-dumper-go_1.2.2_linux_amd64.tar.gz -C ROMFILE
+chmod 777 ~/work/payload/payload/ -R 
+ls -l
+
+aria2c -o rom.zip -s 16 http://romdownload.nubia.com/%E7%BA%A2%E9%AD%943S/V5.17/NX629J-update.zip
+mv ~/work/payload/payload/rom.zip ~/work/payload/payload/DNA2/rom.zip
+
+cd DNA2
+ls -l
+./start.py
+
+
+#红魔
+sudo mkdir ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/vendor/app/media/ ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/001_DNA/imagefv.img ~/work/payload/payload/media
+7z a media.zip ~/work/payload/payload/media
+
+
+#小米
+sudo mkdir ~/work/payload/payload/media
+sudo mkdir ~/work/payload/payload/fonts
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/system/system/media/* ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/system/system/fonts/* ~/work/payload/payload/fonts
+7z a media.zip media
+7z a fonts.zip fonts
+
+
+#oppo
+cd ~/work/payload/payload/
+sudo mkdir ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/my_product/decouping_wallpaper ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/my_product/media/ ~/work/payload/payload/media
+7z a media.zip media
+
+
+#魅族
+cd ~/work/payload/payload/
+sudo mkdir ~/work/payload/payload/media
+sudo mv ~/work/payload/payload/DNA2/Errors_rom/system/system/customizecenter/ ~/work/payload/payload/media
+7z a media.zip media
+
+
+
+unzip rom.zip -d ROMFILE
+cd ROMFILE
+./payload-dumper-go -p abl,logo,splash,imagefv,system -o img payload.bin 
+
+cd ~
+cp ~/work/payload/payload/ROMFILE/img/system.img ~/work/payload/payload/system.img
+
+
