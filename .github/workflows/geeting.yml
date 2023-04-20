@@ -5,7 +5,7 @@ on:
     types: [started]
     
 env:
-  ROM_URL:  https://bigota.d.miui.com/V14.0.7.0.TMACNXM/miui_ISHTAR_V14.0.7.0.TMACNXM_73f8314233_13.0.zip 
+  ROM_URL:  https://bigota.d.miui.com/V14.0.9.0.TLRCNXM/miui_ZIZHAN_V14.0.9.0.TLRCNXM_5ed12fbdf5_13.0.zip 
 
   TZ: Asia/Shanghai
 
